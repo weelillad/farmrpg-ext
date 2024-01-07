@@ -270,7 +270,7 @@ const main = async () => {
     // Munge outgoing requests to fix the origin and referer headers.
     browser.webRequest.onBeforeSendHeaders.addListener(
         details => {
-            if (!details.originUrl.startsWith(`moz-extension://`)) {
+            if (details.originUrl === undefined || !details.originUrl.startsWith(`moz-extension://`)) {
                 return
             }
             let sawReferer = false
